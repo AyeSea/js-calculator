@@ -1,0 +1,18 @@
+.calc-body {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.col-xs-3 {
+	padding: 0;
+}
+
+.btn-calc {
+	height: 75px;
+	width: 75px;
+	width: 100%;
+	background-color: #757575;
+	color: #fff;
+	font-size: 25px;
+	font-weight: bold;
+}

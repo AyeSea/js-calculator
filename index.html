@@ -2,10 +2,58 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/main.js"></script>
 	<title>JavaScript Calculator</title>
 </head>
 <body>
 	
+	<div class="container">
+		
+		<div class="calc-body">
+
+			<!-- Add a row for the display -->
+
+			<div class="row">
+				<div class="col-xs-3"><button class="btn btn-default btn-calc"></button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc"></button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc"></button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="clearAll()">C</button></div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveDigit(7)">7</button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveDigit(8)">8</button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveDigit(9)">9</button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveOperation('divide')">&divide;</button></div>				
+			</div>
+
+			<div class="row">
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveDigit(4)">4</button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveDigit(5)">5</button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveDigit(6)">6</button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveOperation('multiply')">&times;</button></div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveDigit(1)">1</button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveDigit(2)">2</button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveDigit(3)">3</button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveOperation('subtract')">&minus;</button></div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveDigit(.)">.</button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveDigit(0)">0</button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="calculate()">=</button></div>
+				<div class="col-xs-3"><button class="btn btn-default btn-calc" onclick="saveOperation('add')">&plus;</button></div>
+			</div>
+
+		</div>
+
+	</div>
+
 </body>
 </html>
