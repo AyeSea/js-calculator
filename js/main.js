@@ -19,7 +19,9 @@ var subtract = function(a, b) {
 var currentDigits = [];	//stores all of the individual numbers a user inputs before pressing an operation button
 var currentNums = []; //stores numbers input by user
 var currentOperations = []; //stores operations input by user
-
+var prevOperation = ""; //stores previous operation input by user
+var prevNum = 0; //stores previous number input before user called calculate function
+ 
 var saveNum = function() {
 	//joins currentDigits into a single number and saves it to currentRequest
 	currentNums.push(Number(currentDigits.join("")));
@@ -53,14 +55,24 @@ var clearAll = function() {
 
 //Clean Up Function - clean up currentNums and currentOperations arrays after performing an arithmetic operation
 var cleanUp = function(result) {
-	//remove first 2 numbers from currentNums
+	//remove first number from currentNums
 	currentNums.shift();
+
+	//save second number from original currentNums to prevNum and then remove from currentNums
+	if (prevNum === 0) {
+		prevNum = currentNums[0];
+	};
+
 	currentNums.shift();
 
 	//add the result of the arithmetic operation as the 1st element of currentNums
 	currentNums.unshift(result);
 
-	//remove the operation we just used from currentOperations
+	//save the operation we just used as prevOperation and then remove from currentOperations
+	if (prevOperation === "") {
+		prevOperation = currentOperations[0];
+	};
+	
 	currentOperations.shift();
 }
 
@@ -76,6 +88,7 @@ var calculate = function() {
 	//loop until operations array is empty.
 	saveNum();
 
+	// if an operation was input
 	if (currentOperations.length > 0 ) {
 		switch(currentOperations[0]) {
 			case 'add':
@@ -106,6 +119,36 @@ var calculate = function() {
 		}
 
 
+	}
+	//if no operation was input, then we take redo the last operation w/ the last prevNum
+	else {
+		switch(prevOperation) {
+			case 'add':
+				result = add(currentNums[0], prevNum);
+				cleanUp(result);
+				//log result to console
+				console.log(result);
+				//return result (use this later for display)
+				return result;
+
+			case 'subtract':
+				result = subtract(currentNums[0], prevNum);
+				cleanUp(result);
+				console.log(result);
+				return result;
+
+			case 'multiply':
+				result = multiply(currentNums[0], prevNum);
+				cleanUp(result);
+				console.log(result);
+				return result;
+
+			case 'divide':
+				result = divide(currentNums[0], prevNum);
+				cleanUp(result);
+				console.log(result);
+				return result;
+		}
 	}
 
 };
