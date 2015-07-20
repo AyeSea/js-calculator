@@ -81,6 +81,13 @@ var cleanUp = function(result) {
 
 
 //Calculations
+var performCalculation = function(operation, num1, num2) {
+	result = operation(num1, num2);
+	cleanUp(result);
+	console.log(result);
+	$('.display').html(result);
+}
+
 var calculate = function() {
 	//have a switch statement to determine operation and then input the 1st two
 	//numbers from the currentNums array. afer operation is completed, unshift(add to 1st position) 
@@ -95,32 +102,19 @@ var calculate = function() {
 	if (currentOperations.length > 0 ) {
 		switch(currentOperations[0]) {
 			case 'add':
-				result = add(currentNums[0], currentNums[1]);
-				cleanUp(result);
-				//log result to console
-				console.log(result);
-				$('.display').html(result);
+				performCalculation(add, currentNums[0], currentNums[1]);
 				break;
 
 			case 'subtract':
-				result = subtract(currentNums[0], currentNums[1]);
-				cleanUp(result);
-				console.log(result);
-				$('.display').html(result);
+				performCalculation(subtract, currentNums[0], currentNums[1]);
 				break;
 
 			case 'multiply':
-				result = multiply(currentNums[0], currentNums[1]);
-				cleanUp(result);
-				console.log(result);
-				$('.display').html(result);
+				performCalculation(multiply, currentNums[0], currentNums[1]);
 				break;
 
 			case 'divide':
-				result = divide(currentNums[0], currentNums[1]);
-				cleanUp(result);
-				console.log(result);
-				$('.display').html(result);
+				performCalculation(divide, currentNums[0], currentNums[1]);
 				break;
 		}
 
@@ -129,33 +123,18 @@ var calculate = function() {
 	else {
 		switch(prevOperation) {
 			case 'add':
-				result = add(currentNums[0], prevNum);
-				cleanUp(result);
-				//log result to console
-				console.log(result);
-				//return result (use this later for display)
-				$('.display').html(result);
+				performCalculation(add, currentNums[0], prevNum);
 				break;
 
 			case 'subtract':
-				result = subtract(currentNums[0], prevNum);
-				cleanUp(result);
-				console.log(result);
-				$('.display').html(result);
+				performCalculation(subtract, currentNums[0], prevNum);
 				break;
-
 			case 'multiply':
-				result = multiply(currentNums[0], prevNum);
-				cleanUp(result);
-				console.log(result);
-				$('.display').html(result);
+				performCalculation(multiply, currentNums[0], prevNum);
 				break;
 
 			case 'divide':
-				result = divide(currentNums[0], prevNum);
-				cleanUp(result);
-				console.log(result);
-				$('.display').html(result);
+				performCalculation(divide, currentNums[0], prevNum);
 				break;
 		}
 	}
