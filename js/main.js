@@ -36,6 +36,11 @@ var saveDigit = function(num) {
 };
 
 var saveOperation = function(operation) {
+	//for cases when user is performing operations on multiple numbers (e.g. 5 + 1 + 2)
+	if (currentNums.length === 1) {
+		calculate();
+	}
+	
 	if (currentDigits.length > 0) {
 		saveNum();
 	}
@@ -89,13 +94,6 @@ var performCalculation = function(operation, num1, num2) {
 }
 
 var calculate = function() {
-	//have a switch statement to determine operation and then input the 1st two
-	//numbers from the currentNums array. afer operation is completed, unshift(add to 1st position) 
-	//the resulting value to the currentNums array and delete
-	//the original 2 numbers and the used operation from their respective arrays.
-	//this way, we continue operations for currentNums.length > 2 and use the result of
-	//the previous operation as the 1st input for the next operation.
-	//loop until operations array is empty.
 	saveNum();
 
 	// if an operation was input
