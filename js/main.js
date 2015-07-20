@@ -36,20 +36,22 @@ var saveDigit = function(num) {
 };
 
 var saveOperation = function(operation) {
-
 	if (currentDigits.length > 0) {
 		saveNum();
 	}
 	
 	currentOperations.push(operation);
-	console.log(operation); //4debug
-	console.log(currentNums); //4debug
+	console.log(operation);
+	console.log(currentNums);
 };
 
 var clearAll = function() {
 	currentDigits.length = 0;
 	currentNums.length = 0;
 	currentOperations.length = 0;
+	prevOperation = "";
+	prevNum = 0;
+	$('.display').html(0);
 	console.log("Cleared!");
 }
 
@@ -59,6 +61,7 @@ var cleanUp = function(result) {
 	currentNums.shift();
 
 	//save second number from original currentNums to prevNum and then remove from currentNums
+	
 	if (prevNum === 0) {
 		prevNum = currentNums[0];
 	};
@@ -72,7 +75,7 @@ var cleanUp = function(result) {
 	if (prevOperation === "") {
 		prevOperation = currentOperations[0];
 	};
-	
+
 	currentOperations.shift();
 }
 
@@ -96,31 +99,33 @@ var calculate = function() {
 				cleanUp(result);
 				//log result to console
 				console.log(result);
-				//return result (use this later for display)
-				return result;
+				$('.display').html(result);
+				break;
 
 			case 'subtract':
 				result = subtract(currentNums[0], currentNums[1]);
 				cleanUp(result);
 				console.log(result);
-				return result;
+				$('.display').html(result);
+				break;
 
 			case 'multiply':
 				result = multiply(currentNums[0], currentNums[1]);
 				cleanUp(result);
 				console.log(result);
-				return result;
+				$('.display').html(result);
+				break;
 
 			case 'divide':
 				result = divide(currentNums[0], currentNums[1]);
 				cleanUp(result);
 				console.log(result);
-				return result;
+				$('.display').html(result);
+				break;
 		}
 
-
 	}
-	//if no operation was input, then we take redo the last operation w/ the last prevNum
+	//if no operation was input, then we redo the last operation w/ the last prevNum
 	else {
 		switch(prevOperation) {
 			case 'add':
@@ -129,26 +134,38 @@ var calculate = function() {
 				//log result to console
 				console.log(result);
 				//return result (use this later for display)
-				return result;
+				$('.display').html(result);
+				break;
 
 			case 'subtract':
 				result = subtract(currentNums[0], prevNum);
 				cleanUp(result);
 				console.log(result);
-				return result;
+				$('.display').html(result);
+				break;
 
 			case 'multiply':
 				result = multiply(currentNums[0], prevNum);
 				cleanUp(result);
 				console.log(result);
-				return result;
+				$('.display').html(result);
+				break;
 
 			case 'divide':
 				result = divide(currentNums[0], prevNum);
 				cleanUp(result);
 				console.log(result);
-				return result;
+				$('.display').html(result);
+				break;
 		}
 	}
 
 };
+
+//Display
+$(document).ready(function() {
+	$('.btn-calc-num').click(function() {
+		$('.display').html(parseFloat(currentDigits.join("")));
+	});
+
+});
