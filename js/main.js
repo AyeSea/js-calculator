@@ -36,17 +36,20 @@ var saveDigit = function(num) {
 };
 
 var saveOperation = function(operation) {
+	currentOperations.push(operation);
+	console.log(operation + " added to currentOperations");
+
 	//for cases when user is performing operations on multiple numbers (e.g. 5 + 1 + 2)
 	if (currentNums.length === 1) {
-		calculate();
+		if (currentOperations.length === 0) {
+			calculate();
+		}
 	}
 	
 	if (currentDigits.length > 0) {
 		saveNum();
 	}
-	
-	currentOperations.push(operation);
-	console.log(operation);
+
 	console.log(currentNums);
 };
 
@@ -66,22 +69,20 @@ var cleanUp = function(result) {
 	currentNums.shift();
 
 	//save second number from original currentNums to prevNum and then remove from currentNums
-	
-	if (prevNum === 0) {
-		prevNum = currentNums[0];
-	};
-
-	currentNums.shift();
+	if (currentNums.length > 0) {
+		prevNum = currentNums[0]
+		currentNums.shift();
+	}
 
 	//add the result of the arithmetic operation as the 1st element of currentNums
 	currentNums.unshift(result);
 
 	//save the operation we just used as prevOperation and then remove from currentOperations
-	if (prevOperation === "") {
+	if (currentOperations.length > 0) {
 		prevOperation = currentOperations[0];
-	};
+		currentOperations.shift();
+	}
 
-	currentOperations.shift();
 }
 
 
@@ -94,9 +95,11 @@ var performCalculation = function(operation, num1, num2) {
 }
 
 var calculate = function() {
-	saveNum();
+	if (currentDigits.length > 0) {
+		saveNum();
+	};
 
-	// if an operation was input
+	// if an operation was niput
 	if (currentOperations.length > 0 ) {
 		switch(currentOperations[0]) {
 			case 'add':
