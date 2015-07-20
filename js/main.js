@@ -23,9 +23,7 @@ var prevOperation = ""; //stores previous operation input by user
 var prevNum = 0; //stores previous number input before user called calculate function
  
 var saveNum = function() {
-	//joins currentDigits into a single number and saves it to currentRequest
 	currentNums.push(Number(currentDigits.join("")));
-	//deletes contents of currentDigits to prepare for another set of digit(s) to be input by user
 	currentDigits.length = 0;
 }
 
@@ -39,13 +37,16 @@ var saveOperation = function(operation) {
 	currentOperations.push(operation);
 	console.log(operation + " added to currentOperations");
 
-	//for cases when user is performing operations on multiple numbers (e.g. 5 + 1 + 2)
+	//if currentOperations is empty, user pressed '=' to repeat the previous operation.
+	//if currentOperations has 2 elements, user is chaining operations, in which case
+	//we perform intermediary operations (e.g. 5 + 2 + 3 is performed as 5 + 2 first,
+	//resulting in 7, and then 7 + 3) so that the display updates as it does for a calculator. 
 	if (currentNums.length === 1) {
-		if (currentOperations.length === 0) {
+		if (currentOperations.length === 0 || currentOperations.length === 2) {
 			calculate();
 		}
-	}
-	
+	};
+
 	if (currentDigits.length > 0) {
 		saveNum();
 	}
@@ -99,7 +100,7 @@ var calculate = function() {
 		saveNum();
 	};
 
-	// if an operation was niput
+	// if an operation was input
 	if (currentOperations.length > 0 ) {
 		switch(currentOperations[0]) {
 			case 'add':
